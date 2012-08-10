@@ -40,7 +40,17 @@
         <!-- the slider -->
         <div class="m-carousel-inner">
             <!-- the items -->
+
             <div class="m-item m-active">
+                <img src="./assets/img/sisyphus.jpg">
+            </div>
+            <div class="m-item">
+                <img src="./assets/img/symmetry_man.jpg">
+            </div>
+            <div class="m-item">
+                <img src="./assets/img/xray-controller.png">
+            </div>
+            <div class="m-item">
                 <img src="./assets/img/909god.png">
             </div>
             <div class="m-item">
@@ -85,12 +95,12 @@
                 if (ratio >= 1){ // landscape or square
 
                     new_w = viewport_wide * multi;
-                    new_h = Math.floor(new_w / ratio);
+                    new_h = new_w / ratio;
 
                 } else if (ratio < 1) { // portrait
 
                     new_h = viewport_high * multi;
-                    new_w = Math.floor(new_h * ratio);
+                    new_w = new_h * ratio;
 
                 }
 
@@ -110,7 +120,6 @@
 
             }
 
-
             function padImages() {
                 padImage($('.m-item img'));
             }
@@ -126,9 +135,9 @@
 
             $(window).resize(function(){
                 waitForFinalEvent(function(){
-                    padImages();
                     resizeImages();
-                }, 250, "imagepadder");
+                    padImages();
+                }, 10, "imagepadder");
             });
 
         });
