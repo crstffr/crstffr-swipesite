@@ -56,7 +56,7 @@
 
         $(function(){
 
-
+            alert($(window).width());
 
             $('.m-carousel').carousel({
                 dragRadius:10,
@@ -73,8 +73,31 @@
                 }
             });
 
-            function padImages() {
-                padImage($('.m-item img'));
+            function resizeImage(img) {
+
+                img = $(img);
+                var ratio = img.width() / img.height();
+                var viewport_wide = $(window).width();
+                var viewport_high = $(window).height();
+
+                var multi = .9;
+                var new_w = 0;
+                var new_h = 0;
+
+                if (ratio >= 1){ // landscape or square
+
+                    new_w = viewport_wide * multi;
+                    new_h = Math.floor(new_w / ratio);
+
+                } else if (ratio < 1) { // portrait
+
+                    new_h = viewport_high * multi;
+                    new_w = Math.floor(new_h * ratio);
+
+                }
+
+                img.width(new_w).height(new_h);
+
             }
 
             function padImage(img) {
@@ -83,18 +106,30 @@
                 var viewport_high = $(window).height();
 
                 img = $(img);
-                var pad = Math.floor((viewport_wide - img.width()) / 2);
-                img.css({paddingLeft:pad,paddingRight:pad});
+                var pad_w = Math.floor((viewport_wide - img.width()) / 2);
+                var pad_h = Math.floor((viewport_high - img.height()) / 2);
+                img.css({paddingLeft:pad_w,paddingRight:pad_w,paddingTop:pad_h,paddingBottom:pad_h});
 
             }
 
+
+            function padImages() {
+                padImage($('.m-item img'));
+            }
+
+            function resizeImages() {
+                resizeImage($('.m-item img'));
+            }
+
             $('.m-item img').load(function(){
+                resizeImage(this);
                 padImage(this);
             });
 
             $(window).resize(function(){
                 waitForFinalEvent(function(){
                     padImages();
+                    resizeImages();
                 }, 250, "imagepadder");
             });
 
