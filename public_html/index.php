@@ -83,28 +83,33 @@
 
             function resizeImage(img) {
 
-                img = $(img);
-                var ratio = img.width() / img.height();
-                var viewport_wide = $(window).width();
-                var viewport_high = $(window).height();
+                $(img).each(function(){
 
-                var multi = .9;
-                var new_w = 0;
-                var new_h = 0;
+                    img = $(this);
 
-                if (ratio >= 1){ // landscape or square
+                    var ratio = img.width() / img.height();
+                    var viewport_wide = $(window).width();
+                    var viewport_high = $(window).height();
 
-                    new_w = viewport_wide * multi;
-                    new_h = new_w / ratio;
+                    var multi = .9;
+                    var new_w = 0;
+                    var new_h = 0;
 
-                } else if (ratio < 1) { // portrait
+                    if (ratio >= 1){ // landscape or square
 
-                    new_h = viewport_high * multi;
-                    new_w = new_h * ratio;
+                        new_w = viewport_wide * multi;
+                        new_h = new_w / ratio;
 
-                }
+                    } else if (ratio < 1) { // portrait
 
-                img.width(new_w).height(new_h);
+                        new_h = viewport_high * multi;
+                        new_w = new_h * ratio;
+
+                    }
+
+                    img.width(new_w).height(new_h);
+
+                });
 
             }
 
@@ -113,11 +118,12 @@
                 var viewport_wide = $(window).width();
                 var viewport_high = $(window).height();
 
-                img = $(img);
-                var pad_w = Math.floor((viewport_wide - img.width()) / 2);
-                var pad_h = Math.floor((viewport_high - img.height()) / 2);
-                img.css({paddingLeft:pad_w,paddingRight:pad_w,paddingTop:pad_h,paddingBottom:pad_h});
-
+                $(img).each(function(){
+                    img = $(this);
+                    var pad_w = Math.floor((viewport_wide - img.width()) / 2);
+                    var pad_h = Math.floor((viewport_high - img.height()) / 2);
+                    img.css({paddingLeft:pad_w,paddingRight:pad_w,paddingTop:pad_h,paddingBottom:pad_h});
+                });
             }
 
             function padImages() {
