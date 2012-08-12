@@ -1,0 +1,3 @@
+html body .no-print {
+    display: none;
+}
