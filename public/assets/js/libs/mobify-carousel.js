@@ -54,7 +54,7 @@ Mobify.UI.Utils = (function($) {
         }
 
         // Not Supported
-        return;
+        return 1;
     };
 
     $.extend(has, {
@@ -260,6 +260,8 @@ Mobify.UI.Carousel = (function($, Utils) {
         function start(e) {
             if (!has.touch) e.preventDefault();
 
+            $element.trigger('animationStart');
+
             dragging = true;
             canceled = false;
 
@@ -273,6 +275,7 @@ Mobify.UI.Carousel = (function($, Utils) {
 
             lockLeft = self._index == 1;
             lockRight = self._index == self._length;
+
         }
 
         function drag(e) {
@@ -299,9 +302,12 @@ Mobify.UI.Carousel = (function($, Utils) {
         }
 
         function end(e) {
+
             if (!dragging) {
                 return;
             }
+
+            $element.trigger('animationEnd');
 
             dragging = false;
             
@@ -396,9 +402,9 @@ Mobify.UI.Carousel = (function($, Utils) {
         }
         
         // Bail out early if no move is necessary.
-        if (newIndex == this._index) {
+        //if (newIndex == this._index) {
             //return; // Return Type?
-        }
+        //}
 
         // Trigger beforeSlide event
         $element.trigger('beforeSlide', [index, newIndex]);

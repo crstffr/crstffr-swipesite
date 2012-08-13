@@ -16,19 +16,50 @@
     <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <!-- CSS -->
+
     <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="./assets/css/site.css">
+    <link rel="stylesheet" href="./assets/css/site.css?123">
     <link rel="stylesheet" href="./assets/css/carousel.css">
     <link rel="stylesheet" href="./assets/css/carousel-style.css">
 
-    <!-- end CSS-->
-
     <!-- Javascript Libraries -->
 
+    <script src="./assets/js/libs/radio.min.js"></script>
     <script src="./assets/js/libs/jquery.min.js"></script>
+    <script src="./assets/js/libs/jquery.color.js"></script>
+    <script src="./assets/js/libs/handlebars.min.js"></script>
     <script src="./assets/js/libs/mobify-carousel.js"></script>
     <script src="./assets/js/libs/modernizr.custom.82275.js"></script>
 
+    <!-- Javascript Application -->
+
+    <script src="./assets/js/swiper/Swiper.js"></script>
+    <script src="./assets/js/swiper/classes/Util.js"></script>
+    <script src="./assets/js/swiper/classes/Event.js"></script>
+    <script src="./assets/js/swiper/classes/Carousel.js"></script>
+    <script src="./assets/js/swiper/classes/Keyboard.js"></script>
+
+    <!-- Javascript Templates -->
+
+    <script id="tmplPanel" type="text/x-handlebars-template">
+        <div class="m-item" data-lowimage="{{lowimage}}" data-highimage="{{image}}">
+            <div class="panelFrame">
+                <div class="panelFront">
+                    <img class="panelImg low"  src="" width="{{width}}" height="{{height}}" />
+                    <img class="panelImg high" src="" width="{{width}}" height="{{height}}" />
+                </div>
+                <div class="panelBack">
+                    <h2>Test of the Panel Back</h2>
+                    <p>Lorem ipsum dolor sit amet... </p>
+                </div>
+            </div>
+            {{#if title}}
+            <div class="panelTitle">
+                <span class="noselect">{{title}}</span>
+            </div>
+            {{/if}}
+        </div>
+    </script>
 
 </head>
 
@@ -36,128 +67,23 @@
 
     <div id="gradient" class="gradient"></div>
 
-    <div class="m-carousel">
-        <!-- the slider -->
-        <div class="m-carousel-inner">
-            <!-- the items -->
-
-            <div class="m-item m-active">
-                <img src="./assets/img/art/sisyphus.jpg">
-            </div>
-            <div class="m-item">
-                <img src="./assets/img/art/symmetry_man.jpg">
-            </div>
-            <div class="m-item">
-                <img src="./assets/img/art/xray-controller.png">
-            </div>
-            <div class="m-item">
-                <img src="./assets/img/art/909god.png">
-            </div>
-            <div class="m-item">
-                <img src="./assets/img/art/gritty.png">
-            </div>
-            <div class="m-item">
-                <img src="./assets/img/art/ravens.png">
-            </div>
-        </div>
+    <div class="m-carousel" id="carousel">
+        <div class="m-carousel-inner" id="panelContainer"></div>
     </div>
 
     <script>
 
         $(function(){
 
-            $('.m-carousel').carousel({
-                dragRadius:10,
-                moveRadius:20,
-                classPrefix:undefined,
-                classNames:{
-                    outer:"carousel",
-                    inner:"carousel-inner",
-                    item:"item",
-                    center:"center",
-                    touch:"has-touch",
-                    dragging:"dragging",
-                    active:"active"
-                }
-            });
-
-            function resizeImage(img) {
-
-                $(img).each(function(){
-
-                    img = $(this);
-
-                    var ratio = img.width() / img.height();
-                    var viewport_wide = $(window).width();
-                    var viewport_high = $(window).height();
-
-                    var multi = .9;
-                    var new_w = 0;
-                    var new_h = 0;
-
-                    if (ratio >= 1){ // landscape or square
-
-                        new_w = viewport_wide * multi;
-                        new_h = new_w / ratio;
-
-                    } else if (ratio < 1) { // portrait
-
-                        new_h = viewport_high * multi;
-                        new_w = new_h * ratio;
-
-                    }
-
-                    img.width(new_w).height(new_h);
-
-                });
-
-            }
-
-            function padImage(img) {
-
-                var viewport_wide = $(window).width();
-                var viewport_high = $(window).height();
-
-                $(img).each(function(){
-                    img = $(this);
-                    var pad_w = Math.floor((viewport_wide - img.width()) / 2);
-                    var pad_h = Math.floor((viewport_high - img.height()) / 2);
-                    img.css({paddingLeft:pad_w,paddingRight:pad_w,paddingTop:pad_h,paddingBottom:pad_h});
-                });
-            }
-
-            function padImages() {
-                padImage($('.m-item img'));
-            }
-
-            function resizeImages() {
-                resizeImage($('.m-item img'));
-            }
-
-            $('.m-item img').load(function(){
-                resizeImage(this);
-                padImage(this);
-            });
-
-            $(window).resize(function(){
-                waitForFinalEvent(function(){
-                    resizeImages();
-                    padImages();
-                }, 10, "imagepadder");
+            var mySwiper = Swiper.init({
+                debug: false,
+                elements: {
+                    carousel: '#carousel'
+                },
+                panels: [{"image":".\/assets\/img\/art\/dreams\/008.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"I","width":"720","height":"960","borderSize":"25","borderColor":"#cdcab2","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/008.jpg"},{"image":".\/assets\/img\/art\/dreams\/007.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"II","width":"720","height":"960","borderSize":"25","borderColor":"#cdcab2","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/007.jpg"},{"image":".\/assets\/img\/art\/dreams\/005.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"III","width":"720","height":"960","borderSize":"25","borderColor":"#ffffff","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/005.jpg"},{"image":".\/assets\/img\/art\/dreams\/009.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"IV","width":"720","height":"960","borderSize":"25","borderColor":"#cdcab2","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/009.jpg"},{"image":".\/assets\/img\/art\/dreams\/017.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"V","width":"720","height":"960","borderSize":"25","borderColor":"#cdcab2","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/017.jpg"},{"image":".\/assets\/img\/art\/dreams\/012.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"VI","width":"720","height":"960","borderSize":"25","borderColor":"#ffffff","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/012.jpg"},{"image":".\/assets\/img\/art\/dreams\/013.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"VII","width":"720","height":"960","borderSize":"25","borderColor":"#000","titleColor":"#cdcab2","background":"#CCCCCC","lowimage":".\/assets\/img\/art\/dreams\/low\/013.jpg"},{"image":".\/assets\/img\/art\/dreams\/014.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"VIII","width":"720","height":"960","borderSize":"25","borderColor":"#FFF","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/014.jpg"},{"image":".\/assets\/img\/art\/dreams\/006.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"IX","width":"720","height":"960","borderSize":"25","borderColor":"#ffffff","titleColor":"#cdcab2","background":"#222222","lowimage":".\/assets\/img\/art\/dreams\/low\/006.jpg"},{"image":".\/assets\/img\/art\/dreams\/015.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"X","width":"720","height":"960","borderSize":"25","borderColor":"#000","titleColor":"#cdcab2","background":"#CCCCCC","lowimage":".\/assets\/img\/art\/dreams\/low\/015.jpg"},{"image":".\/assets\/img\/art\/dreams\/016.jpg","lowPath":".\/assets\/img\/art\/dreams\/low\/","imagePath":".\/assets\/img\/art\/dreams\/","title":"XVI","width":"720","height":"960","borderSize":"25","borderColor":"#000","titleColor":"#cdcab2","background":"#CCCCCC","lowimage":".\/assets\/img\/art\/dreams\/low\/016.jpg"}]
             });
 
         });
-
-        var waitForFinalEvent = (function () {
-            var timers = {};
-            return function (callback, ms, uniqueId) {
-                if (!uniqueId) { uniqueId = 0; }
-                if (timers[uniqueId]) {
-                    clearTimeout(timers[uniqueId]);
-                }
-                timers[uniqueId] = setTimeout(callback, ms);
-            };
-        })();
 
     </script>
 

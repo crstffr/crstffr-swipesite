@@ -16,35 +16,35 @@
         
         var EVENT_CLICK         = "click touchstart",
             EVENT_MOVE_LEFT     = "panelMoveLeft",
-            EVENT_MOVE_RIGHT    = "panelMoveRight";
+            EVENT_MOVE_RIGHT    = "panelMoveRight",
             EVENT_RESIZE        = "viewportResize";
         
         //----------------------------------------------------------------------
         // Private Properties
         //----------------------------------------------------------------------
-        
+
         var eventDataObject = {
-	
+
 			start:	{x:0, y:0, time: 0}, 		// Starting touchpoint [x pos, y pos, milliseconds]
-			
+
 			delta: 	{
-					
+
 						prevPos:  {x:0, y:0},	// Previous touchpoint
 						dist: 	  {x:0, y:0}, 	// Distance relative to original touchpoint
 						dir:	  {x:0, y:0} 	// Direction of touch [-1 left/up, +1 right/down, 0 no movement]
-					
-					}, 
-					
-			end: 	{ 
-			
+
+					},
+
+			end: 	{
+
 						duration: 0, 			// Duration of touch in milliseconds
 						speed:	  {x:0, y:0},   // Speed of movement along x and y axis
 						flick: 	  {x:0, y:0} 	// +1/-1 if the touch was deemed to be a flick left/right up/down
-					
+
 					}
-	
+
 		};
-        
+
         var self       = this,
             util       = parent.Util,
             event      = parent.Event,
@@ -96,7 +96,7 @@
                 
                 elements: {
                     panelContainer: "#panels",
-                    
+
                     panelWrapper:   ".panelWrapper",
                     panelImage:     ".panelImg",
                     panelCenter:    ".panelCenter",

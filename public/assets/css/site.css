@@ -66,20 +66,16 @@ h1, h2, h3, h4, h5 {
     */
 }
 
-#container {
+#carousel {
     overflow: hidden;
     position: fixed;
     width: 100%;
     height: 100%;
 }
 
-#spinnerWrapper {
-    position: absolute;
+#panelContainer {
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,.85);
-    z-index: 2;
-    display: none;
 }
 
 .touch #container {
@@ -133,24 +129,6 @@ h1, h2, h3, h4, h5 {
     -webkit-perspective: 1000;
 }
 
-.panelWrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    
-    -webkit-transform-style: preserve-3d;
-    
-}
-
-.panelCenter {
-    position: relative;
-    height: 100%;
-    left: 50%;
-    top: 50%;
-}
-
 .panelFrame {
     position: relative;
     float: left;
@@ -159,8 +137,21 @@ h1, h2, h3, h4, h5 {
     top: 0;
     left: 0;
     background: white;
-    /*border: 1px solid rgba(0, 0, 0, 0.6);*/
     padding: 20px;
+
+    -webkit-box-shadow:  8px 8px 24px -8px rgba(0, 0, 0, 1);
+    box-shadow:  8px 8px 24px -8px rgba(0, 0, 0, 1);
+
+    /*
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    */
+
+}
+
+.touch .panelFrame {
+    -webkit-box-shadow: 0;
+    box-shadow: 0;
 }
 
 .panelFrame .panelFront img {
@@ -168,10 +159,13 @@ h1, h2, h3, h4, h5 {
     height: 100%;
     margin: 0;
     -moz-user-select: none;
+
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .panelFrame .panelImg {
-    display: none;
+    display: block;
 }
 
 .panelTitle {
@@ -186,9 +180,8 @@ h1, h2, h3, h4, h5 {
 
 .panelTitle span {
     display: inline-block;
-    /*font-family: 'Sorts Mill Goudy', serif;*/
-    font-family: serif;
-    font-size: 32px;
+    font-family: 'Sorts Mill Goudy', serif;
+    font-size: 20px;
     font-weight: 400;    
     text-shadow: 0px 1px 0px rgba(255,255,255,.25);    
 }
@@ -197,26 +190,4 @@ h1, h2, h3, h4, h5 {
     display: none;
     width: 100%;
     height: 100%;
-}
-
-/*
-.offRight {
-    display: none;
-    margin-left: 100%;
-}
-
-.offLeft {
-    display: none;
-    margin-left: -100%;
-}
-*/
-
-
-.offRight {
-    display: none;    
-    -webkit-transform: translate3d(100%,0,0);
-}
-
-.offLeft {
-    -webkit-transform: translate3d(-100%,0,0);
 }
