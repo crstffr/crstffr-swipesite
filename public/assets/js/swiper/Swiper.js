@@ -91,7 +91,19 @@ var ourNamespace = "Swiper";
                 ]
             });
 
-            self.Carousel.init();
+            self.Carousel.init({
+                isMobile: _settings.isMobile
+            });
+
+            if (_settings.isMobile) {
+                self.Mobile.init({
+                    disableScrolling: true,
+                    bind: [
+                        'pinchIn',
+                        'pinchout'
+                    ]
+                });
+            }
 
         }
 

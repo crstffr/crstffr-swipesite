@@ -39,7 +39,7 @@
 
                 panelData: {
                     title:          false,
-                    titleHeight:    34,
+                    titleHeight:    35,
                     borderSize:     15,
                     titleColor:     "#000",
                     background:     "#bdbdbd",
@@ -50,8 +50,8 @@
                 initialPanels:  [],
 
                 dimensions: {
-                    percentH:   98,
-                    percentW:   98
+                    percentH:   96,
+                    percentW:   96
                 },
 
                 durations: {
@@ -98,6 +98,15 @@
             _current.carouselObj = parent.getElement('carousel');
 
             _setupViewport();
+
+            if (_settings.isMobile) {
+
+                _settings.dimensions = {
+                    percentH:   100,
+                    percentW:   100
+                };
+
+            }
 
             // Bind the window resize event to reset the viewport
             // sizes stored here locally, and then also trigger
@@ -179,6 +188,8 @@
 
         this.onWindowResize = function() {
 
+            if (_settings.isMobile) { return true; }
+
             util.debounce(function(){
 
                 var viewport = _setupViewport();
@@ -186,6 +197,7 @@
 
                 _current.panels.each(function(){
                     var panel = $(this);
+                    self.setBorder(panel);
                     self.setPanelSize(panel);
                 });
 

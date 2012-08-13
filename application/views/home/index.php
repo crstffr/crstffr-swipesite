@@ -18,7 +18,7 @@
     <!-- CSS -->
 
     <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="./assets/css/site.css?123">
+    <link rel="stylesheet" href="./assets/css/site.css?321">
     <link rel="stylesheet" href="./assets/css/carousel.css">
     <link rel="stylesheet" href="./assets/css/carousel-style.css">
 
@@ -29,12 +29,13 @@
     <script src="./assets/js/libs/jquery.color.js"></script>
     <script src="./assets/js/libs/handlebars.min.js"></script>
     <script src="./assets/js/libs/mobify-carousel.js"></script>
-    <script src="./assets/js/libs/modernizr.custom.82275.js"></script>
+    <script src="./assets/js/libs/modernizr.custom.47524.js"></script>
 
     <!-- Javascript Application -->
 
     <script src="./assets/js/swiper/Swiper.js"></script>
     <script src="./assets/js/swiper/classes/Util.js"></script>
+    <script src="./assets/js/swiper/classes/Mobile.js"></script>
     <script src="./assets/js/swiper/classes/Event.js"></script>
     <script src="./assets/js/swiper/classes/Carousel.js"></script>
     <script src="./assets/js/swiper/classes/Keyboard.js"></script>
